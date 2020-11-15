@@ -35,4 +35,7 @@ public class CheckIfPositive {
             System.out.println("Number is negative");
         }
     }
+
+
+
 }
