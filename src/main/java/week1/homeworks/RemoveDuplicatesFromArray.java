@@ -13,7 +13,7 @@ import java.util.Arrays;
      Asa ca m-am folosit strict de cunostiintele pe care le aveam deja.
  */
 
-public class RemoveVDuplicatesFromArray {
+public class RemoveDuplicatesFromArray {
     public static void main(String[] args) {
         int[] array = {21, 1, 2, 3, 5, 5, 6, 7, 8, 9, 10, 11, 3, 12, 5, 0, 24, 8, 25, 1, 2, 39, 1, 1, 50, 2, 2, 27, 123, 5, 0, 0, 0, 0, 5, 5, 5};
 
