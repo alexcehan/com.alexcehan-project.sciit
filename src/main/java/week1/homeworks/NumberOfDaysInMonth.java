@@ -2,6 +2,12 @@ package week1.homeworks;
 
 import java.util.Scanner;
 
+/*
+11. Print the number of days specific to each month in year.
+input: Month (string) of index of the month(1, 2, ... 12)
+output: 31, 30, 28
+ */
+
 public class NumberOfDaysInMonth {
 
     public static void main(String[] args) {
