@@ -37,6 +37,7 @@ public class DisplayThePrime {
 
 
 
+
         System.out.println("____________________________________________________________");
     }
 
