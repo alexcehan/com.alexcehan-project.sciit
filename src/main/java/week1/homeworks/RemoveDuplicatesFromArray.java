@@ -69,6 +69,7 @@ public class RemoveDuplicatesFromArray {
                 } else {
                     j++;
                 }
+                
                 if (j == availablePosition) {
                     finalArray[availablePosition] = array[i];
                     availablePosition++;
