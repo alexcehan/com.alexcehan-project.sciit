@@ -1,4 +1,4 @@
-package week1.homeworks;
+package week2.homeworks;
 
 /*
 1. Calculate the sum of the first 100 prime numbers.
@@ -8,9 +8,17 @@ package week1.homeworks;
 public class SumOfFirst100PrimeNumbers {
     public static void main(String[] args) {
 
+        int number = 100;
+
+        displayTheSumOfSmallerPrimes(number); //change the value of number for testing
+    }
+
+    public static void displayTheSumOfSmallerPrimes(int number) {
+
+
         int sum = 0;
         int count = 0;
-        for (int i = 2; count < 100; i++) {
+        for (int i = 2; count < number; i++) {
             if (isPrime(i)) {
                 sum += i;
                 count++;
