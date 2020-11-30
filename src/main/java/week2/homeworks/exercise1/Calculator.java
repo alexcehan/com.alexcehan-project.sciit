@@ -1,19 +1,22 @@
-package week2.homeworks;
+package week2.homeworks.exercise1;
 
 import java.util.Scanner;
 
 /*
-7. Change the implementation of the calculator
-from the previous meeting to not stop after one calculation. (Hint: put switch inside a while loop)
+6. Change the implementation of the calculator from the previous meeting to use only if-else instead of switch.
  */
 
-public class CalculatorWithSwitch {
+public class Calculator {
 
     public static void main(String[] args) {
-        useCalculatorWithSwitch();
+
+
+
+
+        useCalculator();
     }
 
-    public static void useCalculatorWithSwitch() {
+    public static void useCalculator() {
         Scanner scanner = new Scanner(System.in);
         boolean calculatorFlag = true;
 
@@ -43,22 +46,15 @@ public class CalculatorWithSwitch {
             }
 
 
-            switch (operation) {
-                case "+":
-                    System.out.println(a + " + " + b + " = " + (a + b));
-                    break;
-                case "-":
-                    System.out.println(a + " - " + b + " = " + (a - b));
-                    break;
-                case "*":
-                    System.out.println(a + " * " + b + " = " + (a * b));
-                    break;
-                default:
-                    System.out.println(a + " / " + b + " = " + (1.0* a / b));
-                    break;
+            if (operation.equals("+")) {
+                System.out.println(a + " + " + b + " = " + (a + b));
+            } else if (operation.equals("-")) {
+                System.out.println(a + " - " + b + " = " + (a - b));
+            } else if (operation.equals("*")) {
+                System.out.println(a + " * " + b + " = " + (a * b));
+            } else {
+                System.out.println(a + " / " + b + " = " + (1.0* a / b));
             }
-
-
 
 
             System.out.println("Do you want to perform another calculation?(y/n): ");

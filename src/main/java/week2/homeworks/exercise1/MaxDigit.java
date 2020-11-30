@@ -1,4 +1,4 @@
-package week2.homeworks;
+package week2.homeworks.exercise1;
 
 /*
 3. Display the max digit from a number, read the number from keyboard.

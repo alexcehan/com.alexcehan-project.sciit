@@ -1,4 +1,4 @@
-package week2.homeworks;
+package week2.homeworks.exercise1;
 
 /*
 5. Display all the prime numbers lower than a given number, read the number from keyboard

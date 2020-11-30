@@ -1,4 +1,4 @@
-package week2.homeworks;
+package week2.homeworks.exercise1;
 
 /*
 1. Calculate the sum of the first 100 prime numbers.

@@ -1,4 +1,4 @@
-package week2.homeworks;
+package week2.homeworks.exercise1;
 /*
 10. Write a method that checks if the array is square (i.e. every row has the same length as a itself).
 */

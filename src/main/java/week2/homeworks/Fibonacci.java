@@ -1,4 +1,4 @@
-package week3.homeworks;
+package week2.homeworks;
 
 /*
 2. Write a Java method to print the first 25 terms of the Fibonacci series (without recursion).

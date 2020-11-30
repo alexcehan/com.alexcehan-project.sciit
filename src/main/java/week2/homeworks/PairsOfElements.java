@@ -1,4 +1,4 @@
-package week3.homeworks;
+package week2.homeworks;
 /*
 Write a Java method to find all pairs of elements in an array whose sum is equal to a given number
  */
@@ -6,6 +6,8 @@ Write a Java method to find all pairs of elements in an array whose sum is equal
 public class PairsOfElements {
 
     public static void main(String[] args) {
+
+        //change values in array or the value of number for testing.
         int[] array = {2, 6, 7, 4, 3, 7, 4, 2, 8,2, 12};
         int number = 12;
 

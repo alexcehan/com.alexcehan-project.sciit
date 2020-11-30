@@ -1,4 +1,4 @@
-package week3.homeworks;
+package week2.homeworks;
 
 /*
 3. Write a Java method to find the duplicate characters in a string. (Hint use str.toCharArray() to split the string into an array of characters)

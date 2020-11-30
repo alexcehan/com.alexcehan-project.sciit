@@ -1,4 +1,4 @@
-package week2.homeworks;
+package week2.homeworks.exercise1;
 
 /*
 2. Display the smallest number from an array of numbers (2 versions: with normal for and with foreach)
