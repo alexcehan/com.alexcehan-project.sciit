@@ -21,11 +21,8 @@ public class RemoveDuplicatesFromArray {
         System.out.println(Arrays.toString(finalArray));
 
 
-
-
-
-
     }
+
 
     public static int[] removeDuplicate(int[] array) {
 
@@ -42,10 +39,7 @@ public class RemoveDuplicatesFromArray {
                 } else {
                     j++;
                 }
-
-
             }
-
         }
 
 
@@ -80,12 +74,9 @@ public class RemoveDuplicatesFromArray {
             if (i == array.length) {
                 flag = false;
             }
-
         }
 
         return finalArray;
-
-
     }
 }
 
