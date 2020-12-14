@@ -5,7 +5,7 @@ public class Library {
 
 
 
-    public static void main(String[] args) throws Exception, NullPointerException{
+    public static void main(String[] args) throws Exception {
         Novels.novels[0] = new Novels("Anna Karenina", "Leo Tolstoy", "Drama", 435);
         Novels.novels[1] = new Novels("Madame Bovary", "Gustavo Flaubert","Drama", 365);
         Novels.novels[2] = new Novels("War and Peace", "Leo Tolstoy","History", 534);
