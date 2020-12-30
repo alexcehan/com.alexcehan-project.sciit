@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class User {
 
+
+
     public static ArrayList<User> userDatabase = new ArrayList<>();
     private String firsName;
     private String lastName;
@@ -13,6 +15,7 @@ public class User {
 
     private double totalBalance;
     ArrayList<BankAccount> allAccounts = new ArrayList<>();
+
 
     public User () {
 
@@ -25,6 +28,7 @@ public class User {
         this.lastName = lastName;
         this.cnp = cnp;
         generateBankAccounts(this); //metodele generateBankAccounts() si generateRandomBalance() sunt facute stric pentru generare de cate 3 conturi random si setare automat a unui sold random la fiecare user creat.
+
 
 
 
@@ -80,6 +84,7 @@ public class User {
     }
 
     public double displayTotalBalance() {
+        totalBalance = 0;
         for (int i = 0; i < allAccounts.size(); i++) {
             if(allAccounts.get(i)!= null) {
                 totalBalance+=allAccounts.get(i).getBalance();

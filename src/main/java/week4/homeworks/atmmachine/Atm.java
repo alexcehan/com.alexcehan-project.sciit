@@ -7,8 +7,16 @@ public class Atm {
 
     public static void main(String[] args) throws InterruptedException {
 
-        User.userDatabase.add(new User("Alex", "Cehan", "1900608073835"));
-        User.userDatabase.add(new User("Irina", "Cehan", "1900212435465"));
+        generateAccountsForTesting();
+        System.out.println("Sunt 2 useri creati default si detalille lor sunt afisate la inceputul programului" +
+                " pentru testare.\nIn continuare se poate interactiona cu programul conform optiunilor de mai jos.\n" +
+                "Am ales sa nu lucrez deloc cu import Date aici asa ca datele de expirare se foloseste in schimb" +
+                "\nun double de tip yyyy.mm iar pentru current date un double cu valoarea 2021.01" +
+                "\nLa fiecare user creat se genereaza automat 3 conturi si cate un card atasat fiecarui cont." +
+                "\ntot random se genereaza si suma de bani care se afla in fiecare cont si data de expirare (pentru diversitate)" +
+                "\n____________________________________________________________________\n\n");
+
+
         User currentUser = new User();
         boolean atmRunning = true;
         boolean userSelected = false;
@@ -19,9 +27,10 @@ public class Atm {
         while (atmRunning) {
             while (!userSelected) {
 
-                System.out.println("1. Client existent.");
-                System.out.println("2. Client nou.");
-                userChoice = validOption(0, 3);
+                System.out.println("1. Existing client.");
+                System.out.println("2. New Client.");
+                System.out.println("3. Quit. (The program will be closed.)");
+                userChoice = validOption(0, 4);
 
 
 
@@ -30,23 +39,40 @@ public class Atm {
                     if (currentUser != null) {
                         userSelected = true;
                     }
+                } else if (userChoice == 2){
+                    try {
+                        currentUser = createNewUser();
+                        User.userDatabase.add(currentUser);
+                        for (BankAccount bankAccount : currentUser.allAccounts) {
+                            bankAccount.setBalance(0.0);
+                            bankAccount.card.setExpirationDate(2024.01);
+                        }
+                        System.out.println("\n\nThe account was created, you can now manage it from the main menu!\n\n");
+                        Thread.sleep(2500);
+                        System.out.println("");
+                    }catch (NullPointerException e) {
+                        System.out.println("This CNP is already in our database.");
+                    }
+
+
                 } else {
-                    currentUser = createNewUser();
-                    User.userDatabase.add(currentUser);
+                    atmRunning = false;
+                    System.out.println("Have a nice day!");
+                    return;
                 }
 
             }
 
 
-            System.out.println("1. Detalii cont.");
-            System.out.println("2. Retragere numerar.");
-            System.out.println("3. Depunere numerar.");
-            System.out.println("4. Transfer bancar.");
-            System.out.println("5. Transfer intre conturi proprii");
-            System.out.println("6. Plata POS.");
-            System.out.println("7. Creare Card Bancar nou.");
-            System.out.println("8. Quit.");
-            userChoice = validOption(0, 8);
+            System.out.println("1. Account details");
+            System.out.println("2. Cash withdrawal.");
+            System.out.println("3. Deposit cash.");
+            System.out.println("4. Bank transfer.");
+            System.out.println("5. Transfer betwwen own accounts.");
+            System.out.println("6. POS Payment.");
+            System.out.println("7. Manage cards.");
+            System.out.println("8. Quit. (The program won't be closed.)");
+            userChoice = validOption(0, 9);
 
 
             switch (userChoice) {
@@ -62,9 +88,7 @@ public class Atm {
                     BankAccount.depositMoney(currentUser);
                     break;
                 case 4:
-                    User toTransfer = findUser();
-                    System.out.println("Enter the amount you want to transfer: ");
-                    double moneyToTransfer = validOption(0, Integer.MAX_VALUE);
+                    BankAccount.bankTransfer(currentUser);
                     break;
                 case 5:
                     User.transferBetweenOwnAccounts(currentUser);
@@ -74,26 +98,20 @@ public class Atm {
                     Pos.makePayment(currentUser);
                     break;
 
+
                 case 7:
-                    createNewCard(currentUser);
+                    Card.manageCards(currentUser);
                     break;
 
                 case 8:
                     System.out.println("Have a good day!");
-                    atmRunning = false;
+                    userSelected = false;
                     break;
             }
 
 
         }
 
-
-        User newUser = new User("Alexandru", "Cehan", "1900608073835");
-
-//        System.out.println(newUser.bankAccount.getIban());
-//        System.out.println(newUser.card.getCardNumber());
-//        System.out.println(newUser.card.getExpirationDate());
-//        System.out.println(newUser.card.getCvvCode());
 
 
     }
@@ -140,31 +158,25 @@ public class Atm {
 
     }
 
-    public static User findUser() {
-        String userString = "";
-        System.out.println("Enter the Bank Account of the person you want to transfer to: ");
-        userString = scanner.nextLine();
-        User enteredUser = new User();
-        enteredUser = enteredUser.findAccount(userString);
-        if (enteredUser == null) {
-            System.out.println("We don't have any information about this account. Make the transfer at own risk");
-        } else {
-            System.out.println("This account belongs to " + enteredUser.getFirsName() + " " + enteredUser.getLastName());
-        }
 
-        return enteredUser;
-
-
-    }
 
     public static User createNewUser() {
         System.out.println("Let's create your account!");
-        System.out.println("Enter your firs name: ");
+        System.out.println("Enter your first name: ");
         String firstName = scanner.nextLine();
         System.out.println("Enter your last name: ");
         String lastName = scanner.nextLine();
         System.out.println("Enter your CNP: ");
         String cnp = scanner.nextLine();
+
+        for (User user : User.userDatabase) {
+            if (user.getCnp().equals(cnp)) {
+
+                return null;
+            }
+
+        }
+
 
         return new User(firstName, lastName, cnp);
     }
@@ -175,6 +187,7 @@ public class Atm {
         while (true) {
             if (scanner.hasNextInt()) {
                 userChoice = scanner.nextInt();
+                scanner.nextLine();
                 if (userChoice > min && userChoice < max) {
                     break;
                 } else {
@@ -182,6 +195,27 @@ public class Atm {
                 }
             } else {
                 System.out.println("Please enter a valid option.");
+                scanner.nextLine();
+            }
+        }
+
+
+        return userChoice;
+
+    }
+
+    public static int validOption(int min, int max, String random) {
+        int userChoice = 0;
+        while (true) {
+            if (scanner.hasNextInt()) {
+                userChoice = scanner.nextInt();
+                if (userChoice > min && userChoice < max) {
+                    break;
+                } else {
+                    System.out.println("Please enter a valid pin code of 4 digits.");
+                }
+            } else {
+                System.out.println("Please enter a valid pin code of 4 digits.");
             }
         }
         scanner.nextLine();
@@ -201,16 +235,75 @@ public class Atm {
             if (user.allAccounts.get(i) != null) {
                 numberOfAccount++;
             }
+
         }
+
+        System.out.format("%-20s %-20s %-11s","IBAN CODE", "CARD NAME", "BALANCE");
+        System.out.println("");
+        System.out.println("-------------------------------------------------------------------------------------");
         for (int i = 0; i < numberOfAccount; i++) {
-            System.out.println((i +1) +". " + user.allAccounts.get(i).getIban()+" "+ user.allAccounts.get(i).card.getLabel() + " " + user.allAccounts.get(i).getBalance());
+            String ibanOutput = user.allAccounts.get(i).getIban();
+            String balanceOutput = Double.toString(user.allAccounts.get(i).getBalance());
+            String labelOutput = user.allAccounts.get(i).card.getLabel();
+            String cardNumberOutput = user.allAccounts.get(i).card.getCardNumber();
+            String cvvOutput = Integer.toString(user.allAccounts.get(i).card.getCvvCode());
+            String dateOutput = Double.toString(user.allAccounts.get(i).card.getExpirationDate());
+
+            System.out.format("%-20s %-20s %9s\n",ibanOutput, labelOutput, balanceOutput);
         }
-        System.out.println("Total Balance: " + user.displayTotalBalance());
+
+        System.out.format("%-20s %30s", "Total Balance: ", Double.toString(user.displayTotalBalance()));
 
 
         System.out.println("");
         System.out.println("____________________________________________________________________________________");
 
+    }
+
+    public static void generateAccountsForTesting() {
+        User.userDatabase.add(new User("Alex", "Cehan", "1900608643523"));
+        User.userDatabase.add(new User("Ion", "Popescu", "1850101435465"));
+
+
+
+        System.out.println();
+
+
+
+        for(User user : User.userDatabase) {
+            System.out.println("____________________________________________________________________");
+            System.out.println(user.getFirsName() + " " + user.getLastName() + "          CNP:" + user.getCnp());
+            System.out.println("");
+            String ibanOutput = "IBAN CODE";
+            String labelOutput = "BALANCE";
+            String balanceOutput = "CARD NAME";
+            System.out.format("%-20s %-20s %-10s",ibanOutput, labelOutput, balanceOutput);
+            System.out.println("\n--------------------------------------------------------------------");
+            for (BankAccount bankAccount : user.allAccounts) {
+
+                ibanOutput = bankAccount.getIban();
+                balanceOutput = Double.toString(bankAccount.getBalance());
+                labelOutput = bankAccount.card.getLabel();
+                System.out.format("%-20s %-20s %-10s",ibanOutput, labelOutput, balanceOutput);
+                System.out.println();
+            }
+            System.out.println("\n");
+            System.out.format("%-20s %-25s %-5s %-9s","CARD NAME", "CARD NUMBER", "CVV", "EXPIRATION DATE\n");
+            for (BankAccount bankAccount : user.allAccounts) {
+                ibanOutput = bankAccount.getIban();
+                balanceOutput = Double.toString(bankAccount.getBalance());
+                labelOutput = bankAccount.card.getLabel();
+                String cardNumberOutput = bankAccount.card.getCardNumber();
+                String cvvOutput = Integer.toString(bankAccount.card.getCvvCode());
+                String dateOutput = Double.toString(bankAccount.card.getExpirationDate());
+
+                System.out.format("%-20s %-25s %-5s %-9s",labelOutput, cardNumberOutput, cvvOutput, dateOutput);
+                System.out.println();
+
+            }
+
+            System.out.println("____________________________________________________________________");
+        }
     }
 
 
