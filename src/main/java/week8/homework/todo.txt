@@ -1,0 +1,16 @@
+Incercati sa folositi si clase din NIO precum Path, Paths si Files
+
+        X. Implement a method to get a list of all file/directory names from the given.
+2. Implement a method to get specific files by extensions from a specified folder.
+        X. Implement a method to check if a file or directory specified by pathname exists or not.
+        X. Implement a method to check if a file or directory has read and write permission.
+        X. Implement a method to check if given pathname is a directory or a file.
+        X. Implement a method to get last modified time of a file.
+        X. Implement a method to get file size in bytes, kb, mb.
+8. Implement a method to read a file line by line and store it into a variable.
+        X. Implement a method to store text file content line by line into an array.
+10. Implement a method to write and read a plain text file.
+11. Implement a method to append text to an existing file.
+        X.plement a method to read first 3 lines from a file.
+        X Implement a method to find the longest word in a text file.
+        X.Implement a method to find a specific word in a text file, will return true if exists, false otherwise.

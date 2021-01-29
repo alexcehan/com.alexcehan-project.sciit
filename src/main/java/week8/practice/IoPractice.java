@@ -1,28 +1,29 @@
 package week8.practice;
-import java.net.URL;
-import java.io.IOException;
-import java.util.Scanner;
 
+import lombok.extern.log4j.Log4j2;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+
+@Log4j2
 public class IoPractice {
 
     public static void main(String[] args) throws IOException {
-        URL url = new URL("https://www.biathlonworld.com/competitions/world-cup/events/bmw-ibu-world-cup-biathlon-antholz-anterselva-2021/bt2021swrlcp07/race/men-20km-individual/bt2021swrlcp07smin/");
+        Path path = Paths.get("src/main/java/week8/homework/biathlon/race_results.csv");
+        String filepath = ("src/main/java/week8/homework/biathlon/race_results.csv");
 
-        Scanner scanner = new Scanner(url.openStream());
+        System.out.println(Files.size(path));
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        System.out.println(df.format(Files.getLastModifiedTime(path).toMillis()));
+        //System.out.println(Files.getPosixFilePermissions(path));
+        File file = new File(filepath);
 
-        StringBuffer stringBuffer = new StringBuffer();
-
-        while (scanner.hasNext()) {
-            stringBuffer.append(scanner.next());
-            //System.out.println(scanner.next());
-        }
-
-
-        String result = stringBuffer.toString();
-        System.out.println(result);
-
-        result = result.replaceAll("<[^>]*>", "");
-
-        System.out.println(result);
+        System.out.println(file.canExecute());
+        System.out.println(file.canRead());
+        System.out.println(file.canWrite());
     }
 }

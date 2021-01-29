@@ -10,11 +10,11 @@ public class DisplayTop3 {
     public static void main(String[] args) {
         TreeSet<Player> top3Set = new TreeSet<Player>(new PlayerComparator());
         String filename = "src/main/java/week8/homework/biathlon/race_results.csv";
-        String line = "";
+        String line;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] split = line.split(",");
-                if (split[0].equals("AthleteNumber")) {
+                if (split[0].equals("Athlete Number")) {
                     continue;
                 }
                 Player player = new Player();
