@@ -2,10 +2,7 @@ package week8.homework;
 
 import lombok.extern.log4j.Log4j2;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,16 +17,20 @@ public class MethodsWeek8 {
     public static void main(String[] args) throws Exception {
         String givinDir = "src/main/java";
         String givinFile = "src/main/java/week8/homework/biathlon/race_results.csv";
-      /* 1. */  listDirectoryContent(givinDir);
-      /* 3. */  System.out.println(checkIfFileOrDirectoryExist(givinFile));
-      /* 4. */ checkReadWritePermission(givinFile);
-      /* 5. */  checkIfFileOrDirectory(givinDir);
-      /* 6. */  System.out.println(lastModifiedTime(givinFile));
-      /* 7. */  getFileSize(givinFile);
-      /* 9. */ storeFileToArray(givinFile);
-      /* 12.*/ printFirstThreeLine(givinFile);
-      /* 13 */ System.out.println(returnLongestWordInFile(givinFile));
-      /* 14 */ System.out.println(checkIfWordExistsInFile(givinFile, "Athlete"));
+
+        //      /* 1. */  listDirectoryContent(givinDir);
+//      /* 2. */ listSpecificFileExtension(givinDir, ".txt");
+//      /* 3. */  System.out.println(checkIfFileOrDirectoryExist(givinFile));
+//      /* 4. */ checkReadWritePermission(givinFile);
+//      /* 5. */  checkIfFileOrDirectory(givinDir);
+//      /* 6. */  System.out.println(lastModifiedTime(givinFile));
+//      /* 7. */  getFileSize(givinFile);
+//      /* 9. */ storeFileToArray(givinFile);
+//      /* 10. si 11. */  createReadAndWriteFile(); // am incadrat 10 si 11 intr-o singura metoda.
+//      /* 12.*/ printFirstThreeLine(givinFile);
+//      /* 13 */ System.out.println(returnLongestWordInFile(givinFile));
+//      /* 14 */ System.out.println(checkIfWordExistsInFile(givinFile, "Athlete"));
+
 
 
     }
@@ -47,6 +48,19 @@ public class MethodsWeek8 {
                 }
             }
 
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void listSpecificFileExtension(String path, String extension) {
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(path))) {
+            for (Path path1 :stream) {
+                if (Files.isRegularFile(path1) && path1.toString().endsWith(extension)) {
+                    System.out.println(path1.getFileName());
+                }
+            }
 
         } catch (IOException e) {
             System.out.println(e);
@@ -168,6 +182,62 @@ public class MethodsWeek8 {
         array = stringList.toArray(array);
 
         return array;
+    }
+
+
+
+//    10. Implement a method to write and read a plain text file.
+//    11. Implement a method to append text to an existing file.
+    public static void createReadAndWriteFile() throws IOException{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Specify the name of the new file: ");
+        String userFile = reader.readLine();
+        String filepath = ("src/main/resources/" + userFile);
+        File file = new File(filepath);
+        try {
+            boolean result = (file.createNewFile());
+            if (result) {
+                System.out.println("The file was created. The file is stored at: " + file.getCanonicalPath());
+            } else {
+                System.out.println("The file already exists. The file is stored at: " + file.getCanonicalPath());
+            }
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        try (FileWriter fileWriter = new FileWriter(file, true)) {
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            System.out.println("Write lines to add to file. End line with 'Enter' ");
+            System.out.println("End adding lines to file by writing 'stop'.");
+            String line = "";
+
+            while (!(line = reader.readLine()).toLowerCase().equals("stop")) {
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
+            }
+
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        System.out.println("Do you want to read the content of the file? (y/n) ");
+        String answer = reader.readLine();
+        if (answer.equals("y")) {
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while((line = bufferedReader.readLine()) != null) {
+                    System.out.println(line);
+
+                }
+
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+
+
     }
 
 
