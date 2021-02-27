@@ -53,6 +53,8 @@ public class JDBC {
                     Date parsed = dateFormat.parse(dateString);
                     java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
 
+
+
                     statement.executeUpdate("INSERT INTO users_table(first_name, last_name, date_birth) values('"+ firstname + "', '" + lastname + "', '" + sqlDate +"')");
 
                 }
