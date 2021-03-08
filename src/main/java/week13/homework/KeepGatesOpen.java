@@ -7,7 +7,7 @@ public class KeepGatesOpen extends Thread {
 
 
     public boolean checkIfSoldOut() {
-        if ((festivalStatisticsThread.fullCount + festivalStatisticsThread.fullvipCount + festivalStatisticsThread.freepassCount + festivalStatisticsThread.onedayCount + festivalStatisticsThread.onedayvipCount) > 100) {
+        if ((festivalStatisticsThread.fullCount + festivalStatisticsThread.fullvipCount + festivalStatisticsThread.freepassCount + festivalStatisticsThread.onedayCount + festivalStatisticsThread.onedayvipCount) > 1000) {
             return true;
         } else {
             return false;
