@@ -30,7 +30,7 @@ public class Delivery extends Thread {
             totalValue += pachet.getValue();
         }
 
-        System.out.println("The group value is: " + totalValue);
+        System.out.println("The group package value is: " + totalValue);
         System.out.println("The group revenue is " + valueOfDelivery);
         System.out.println();
         System.out.println("______________________________________________________________________________");
