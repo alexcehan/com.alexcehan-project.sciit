@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Am folosit si Thread pentru printarea rezultatului, declarat in clasa Delivery.
  * Am creat clasa Package si am vazut ulterior ca poate fi o chestie confuza in java dar am mers cu numele asta pana la capat.
  * Am creat si un comparator pentru sortare desi lista era sortata deja dar am zis... "hai sa pretindem ca nu e".
- * Ai sa observezi ca absolut toate listele sunt declarate peste ca ArrayList ceea ce mi se pare cam urat dar m-am chinuit
+ * Ai sa observezi ca absolut toate listele sunt declarate peste tot ca ArrayList ceea ce mi se pare cam urat dar m-am chinuit
  * foarte mult sa scap de 'unchecked warnings', ulterior am descoperit @SuppressWarning dar nu am mai refacut toate listele
  * ca inainte. Per total codul nu ma incanta cum arata chiar daca outputul indeplineste cerintele problemei.
  * Probabil daca as fi stapanit mai bine Java 8 as fi putut sa il fac sa arate mai placut pentru ochi si poate mai
