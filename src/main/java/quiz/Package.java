@@ -9,10 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Builder
@@ -70,6 +67,13 @@ public class Package {
         }
 
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(targetLocation, deliveryDate);
+    }
+
+
 
     @Override
     public String toString() {
